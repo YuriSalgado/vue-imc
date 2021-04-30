@@ -10,7 +10,7 @@
       <div>
         <input type="text" placeholder="Altura (cm)" class="input">
       </div>  
-      <button type="button" class="button button-text">Calcular</button>
+      <button type="button" class="button button-text" v-on:click="handleClick">Calcular</button>
     </div>
   </div>
 </template>
