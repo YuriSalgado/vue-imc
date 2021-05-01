@@ -5,12 +5,12 @@
     <h3 class="description">{{ description }}</h3>
     <div class="wrapper">
       <div>
-        <input type="text" placeholder="Peso (kg)" class="input">
+        <input type="text" class="input" placeholder="Peso (kg)" v-model="imc.peso">
       </div>
       <div>
-        <input type="text" placeholder="Altura (cm)" class="input">
+        <input type="text" class="input" placeholder="Altura (cm)" v-model="imc.altura">
       </div>  
-      <button type="button" class="button button-text" v-on:click="handleClick">Calcular</button>
+      <button type="button" class="button button-text" v-on:click="handleCalc(imc)">Calcular</button>
     </div>
   </div>
 </template>
@@ -18,10 +18,34 @@
 <script>
 export default {
   name: 'IMC',
+  data: function() {
+    return {
+      imc: {
+        peso: "",
+        altura: ""
+      }
+    }
+  },
   props: {
     title: String,
     description: String
+  },
+  methods: {
+    handleCalc: function (imc) {
+      const altura = imc.altura, peso = imc.peso;
+      const alt = altura / 100;
+      const result = peso / (alt * alt);
+
+      if (result < 18.6) {
+        alert("Você está abaixo do peso! " + result.toFixed(2));
+      } else if (result >= 18.6 && 24.9) {
+        alert("Peso ideal! " + result.toFixed(2));
+      } else if (result >= 24.9 && result > 34.9) {
+        alert("Levemente acima do peso! " + result.toFixed(2));
+      }
+    }
   }
+
 }
 </script>
 
